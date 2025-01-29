@@ -84,3 +84,25 @@ function RenderTable(){ //RenderTable fuggveny letrehozasa
 }
 
 RenderTable(); // a renderTable meghívása
+
+const form = document.getElementById('form'); // A form elem beszerzése
+form.addEventListener('submit', function(e) { // A form submit eseményére eseménykezelőt adok
+    e.preventDefault(); // Megakadályozom az alapértelmezett műveletet
+    const terElem = document.getElementById('fizika'); // Elérem a HTML-ból a fizika mezőt
+    const idoElem = document.getElementById('ido'); // Elérem a HTML-ból az idő mezőt
+    const kepvElem = document.getElementById('tudos1'); // Elérem a HTML-ból az első tudós mezőt
+    const kepv2Elem = document.getElementById('tudos2'); // Elérem a HTML-ból a második tudós mezőt
+    const terValue = terElem.value; // A terElem értékét eltárolom a terV változóba
+    const idoValue = idoElem.value; // Az idoElem értékét eltárolom az idoV változóba
+    const kepvValue = kepvElem.value; // A kepvElem értékét eltárolom a kepvV változóba
+    const kepv2Value = kepv2Elem.value; // A kepv2Elem értékét eltárolom a kepv2V változóba
+    const uj = { // Létrehozok egy új objektumot
+        ter: terValue, // A ter tulajdonság értéke terV
+        ido: idoValue, // Az ido tulajdonság értéke idoV
+        kepv: kepvValue, // A kepv tulajdonság értéke kepvV
+        kepv2: kepv2Value, // A kepv2 tulajdonság értéke kepv2V
+    };
+    sorok.push(uj); // Az új objektumot hozzáadom a tömbhöz
+    tbl.innerHTML = ""; // A tbl tartalmát törlöm
+    RenderTable(); // Meghívom a RenderTable függvényt
+});
