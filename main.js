@@ -55,78 +55,27 @@ thr.appendChild(th3); // Cella hozzáadása a fejlécsorhoz
 const tbd = document.createElement('tbody'); // Törzs létrehozása
 tbl.appendChild(tbd); // Törzs hozzáadása a táblázathoz
 
-// Első sor létrehozása
-const tr1 = document.createElement('tr');
-tbd.appendChild(tr1);
+// Sorok hozzáadása a táblázathoz for ciklussal
+for (let i = 0; i < sorok.length; i++) {
+    const sor = sorok[i]; // Aktuális sor
 
-const td1_1 = document.createElement('td');
-td1_1.innerHTML = sorok[0].ter;
-tr1.appendChild(td1_1);
+    const tr = document.createElement('tr'); // Sor létrehozása
+    tbd.appendChild(tr); // Sor hozzáadása a törzshöz
 
-const td1_2 = document.createElement('td');
-td1_2.innerHTML = sorok[0].ido;
-tr1.appendChild(td1_2);
+    const td1 = document.createElement('td'); // Első cella létrehozása
+    td1.innerHTML = sor.ter; // Cella szövegének beállítása
+    tr.appendChild(td1); // Cella hozzáadása a sorhoz
 
-const td1_3 = document.createElement('td');
-td1_3.innerHTML = sorok[0].kepv;
-tr1.appendChild(td1_3);
+    const td2 = document.createElement('td'); // Második cella létrehozása
+    td2.innerHTML = sor.ido; // Cella szövegének beállítása
+    tr.appendChild(td2); // Cella hozzáadása a sorhoz
 
-// Második sor létrehozása
-const tr2 = document.createElement('tr');
-tbd.appendChild(tr2);
+    const td3 = document.createElement('td'); // Harmadik cella létrehozása
+    td3.innerHTML = sor.kepv; // Cella szövegének beállítása
+    tr.appendChild(td3); // Cella hozzáadása a sorhoz
 
-const td2_1 = document.createElement('td');
-td2_1.innerHTML = sorok[1].ter;
-tr2.appendChild(td2_1);
-
-const td2_2 = document.createElement('td');
-td2_2.innerHTML = sorok[1].ido;
-tr2.appendChild(td2_2);
-
-const td2_3 = document.createElement('td');
-td2_3.innerHTML = sorok[1].kepv;
-tr2.appendChild(td2_3);
-
-const td2_4 = document.createElement('td');
-td2_4.innerHTML = sorok[1].kepv2;
-tr2.appendChild(td2_4);
-
-// Harmadik sor létrehozása
-const tr3 = document.createElement('tr');
-tbd.appendChild(tr3);
-
-const td3_1 = document.createElement('td');
-td3_1.innerHTML = sorok[2].ter;
-tr3.appendChild(td3_1);
-
-const td3_2 = document.createElement('td');
-td3_2.innerHTML = sorok[2].ido;
-tr3.appendChild(td3_2);
-
-const td3_3 = document.createElement('td');
-td3_3.innerHTML = sorok[2].kepv;
-tr3.appendChild(td3_3);
-
-const td3_4 = document.createElement('td');
-td3_4.innerHTML = sorok[2].kepv2;
-tr3.appendChild(td3_4);
-
-// Negyedik sor létrehozása
-const tr4 = document.createElement('tr');
-tbd.appendChild(tr4);
-
-const td4_1 = document.createElement('td');
-td4_1.innerHTML = sorok[3].ter;
-tr4.appendChild(td4_1);
-
-const td4_2 = document.createElement('td');
-td4_2.innerHTML = sorok[3].ido;
-tr4.appendChild(td4_2);
-
-const td4_3 = document.createElement('td');
-td4_3.innerHTML = sorok[3].kepv;
-tr4.appendChild(td4_3);
-
-const td4_4 = document.createElement('td');
-td4_4.innerHTML = sorok[3].kepv2;
-tr4.appendChild(td4_4);
+    // Ha van második képviselő, hozzáadjuk a negyedik cellát
+    const td4 = document.createElement('td');
+    td4.innerHTML = sor.kepv2; // Cella szövegének beállítása
+    tr.appendChild(td4); // Cella hozzáadása a sorhoz
+}
