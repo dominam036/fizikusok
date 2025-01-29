@@ -83,4 +83,4 @@ function RenderTable(){ //RenderTable fuggveny letrehozasa
     }
 }
 
-RenderTable();
+RenderTable(); // a renderTable meghívása
