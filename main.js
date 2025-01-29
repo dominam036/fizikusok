@@ -96,13 +96,43 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
     const idoValue = idoElem.value; // Az idoElem értékét eltárolom az idoV változóba
     const kepvValue = kepvElem.value; // A kepvElem értékét eltárolom a kepvV változóba
     const kepv2Value = kepv2Elem.value; // A kepv2Elem értékét eltárolom a kepv2V változóba
-    const uj = { // Létrehozok egy új objektumot
-        ter: terValue, // A ter tulajdonság értéke terV
-        ido: idoValue, // Az ido tulajdonság értéke idoV
-        kepv: kepvValue, // A kepv tulajdonság értéke kepvV
-        kepv2: kepv2Value, // A kepv2 tulajdonság értéke kepv2V
-    };
-    sorok.push(uj); // Az új objektumot hozzáadom a tömbhöz
-    tbl.innerHTML = ""; // A tbl tartalmát törlöm
-    RenderTable(); // Meghívom a RenderTable függvényt
+
+    const errorszoveg = "A mező kitöltése kötelező!"; // Az error üzenetet egy változóba helyezzük
+    const current = e.currentTarget; // Az 'e' esemény célját (aktuális elem) tároljuk a current változóban
+    const errorok = current.querySelectorAll('.error'); // Az összes error elemet kivesszük a current-ből
+    let valid = true; // A valid változó alapértelmezett értéke igaz
+
+    for (const i of errorok) { // Végigiterálunk az összes hibaüzeneten
+        i.innerHTML = ""; // Az összes hibaüzenetet töröljük
+    }
+
+    if (terV === "") { // Ha a terV változó üres, akkor hiba van
+        const parent = terHTML.parentElement; // Kivesszük a terHTML elem szülőjét
+        const error = parent.querySelector('.error'); // Az adott szülőhöz tartozó error elemet keresünk
+        if (error != "") { // Ha az error nem üres (azaz van hibaüzenet)
+            error.innerHTML = errorszoveg; // Az error üzenetét az 'errorszoveg' változóval helyettesítjük
+        }
+        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel a terV üres
+    }
+
+    if (idoV === "") { // Ha az idoV változó üres, akkor hiba van
+        const parent = idoHTML.parentElement; // Kivesszük az idoHTML elem szülőjét
+        const error = parent.querySelector('.error'); // Az adott szülőhöz tartozó error elemet keresünk
+        if (error != "") { // Ha az error nem üres (azaz van hibaüzenet)
+            error.innerHTML = errorszoveg; // Az error üzenetét az 'errorszoveg' változóval helyettesítjük
+        }
+        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel az idoV üres
+    }
+
+    if (valid) { // Ha nincs hiba, és valid értéke igaz, akkor folytatjuk
+        const uj = { // Létrehozunk egy új objektumot
+            ter: terValue, // A ter tulajdonság értéke terValue
+            ido: idoValue, // Az ido tulajdonság értéke idoValue
+            kepv: kepvValue, // A kepv tulajdonság értéke kepvValue
+            kepv2: kepv2Value, // A kepv2 tulajdonság értéke kepv2Value
+        };
+        sorok.push(uj); // Az új objektumot hozzáadjuk a sorok tömbhöz
+    }
+    tbl.innerHTML = ""; // A táblázat tartalmát töröljük
+    RenderTable(); // Meghívjuk a RenderTable függvényt a frissített táblázat megjelenítéséhez
 });
