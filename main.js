@@ -74,7 +74,9 @@ for (let i = 0; i < sorok.length; i++) {
     td3.innerHTML = sor.kepv; // Cella szövegének beállítása
     tr.appendChild(td3); // Cella hozzáadása a sorhoz
 
-    const td4 = document.createElement('td'); // Negyedik cella létrehozása
-    td4.innerHTML = sor.kepv2; // Cella szövegének beállítása
-    tr.appendChild(td4); // Cella hozzáadása a sorhoz
+    if(sor.kepv2){ // Ha van kepv2 akkor megyünk be
+        const td4 = document.createElement('td'); // Negyedik cella létrehozása
+        td4.innerHTML = sor.kepv2; // Cella szövegének beállítása
+        tr.appendChild(td4); // Cella hozzáadása a sorhoz
+    }
 }
