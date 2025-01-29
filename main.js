@@ -100,6 +100,7 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
     const kepv2Value = kepv2Elem.value; // A kepv2Elem értékét eltárolom a kepv2V változóba
 
     const errorszoveg = "A mező kitöltése kötelező!"; // Az error üzenetet egy változóba helyezzük
+    const errorkepv = "Legalább egy tudóst meg kell adni!" //az error szöveget a kepviselőkhöz berakjuk egy változóba
     const current = e.currentTarget; // Az 'e' esemény célját (aktuális elem) tároljuk a current változóban
     const errorok = current.querySelectorAll('.error'); // Az összes error elemet kivesszük a current-ből
     let valid = true; // A valid változó alapértelmezett értéke igaz
@@ -108,16 +109,16 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
         i.innerHTML = ""; // Az összes hibaüzenetet töröljük
     }
 
-    if(!validate(terValue, errorszoveg)){ //ha a validate falseal ter vissza akkor megyunk be
+    if(!validate(terElem, errorszoveg)){ //ha a validate falseal ter vissza akkor megyunk be
         valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel a terValue üres
     }
 
-    if(!validate(idoValue, errorszoveg)){ //ha a validate falseal ter vissza akkor megyunk be
+    if(!validate(idoElem, errorszoveg)){ //ha a validate falseal ter vissza akkor megyunk be
         valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel az idoValue üres
     }
-
-    if (valid) { // Ha nincs hiba, és valid értéke igaz, akkor folytatjuk
-        const uj = { // Létrehozunk egy új objektumot
+    
+    if (valid) { // Ha a form valid
+        uj = { 
             ter: terValue, // A ter tulajdonság értéke terValue
             ido: idoValue, // Az ido tulajdonság értéke idoValue
             kepv: kepvValue, // A kepv tulajdonság értéke kepvValue
