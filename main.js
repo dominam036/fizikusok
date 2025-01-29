@@ -79,6 +79,8 @@ function RenderTable(){ //RenderTable fuggveny letrehozasa
             const td4 = document.createElement('td'); // Negyedik cella létrehozása
             td4.innerHTML = sor.kepv2; // Cella szövegének beállítása
             tr.appendChild(td4); // Cella hozzáadása a sorhoz
+        }else{
+            td3.colSpan = 2 //beállítjuk a colspant a cellára
         }
     }
 }
@@ -106,22 +108,22 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
         i.innerHTML = ""; // Az összes hibaüzenetet töröljük
     }
 
-    if (terValue === "") { // Ha a terValue változó üres, akkor hiba van
+    if(!validate(terValue, errorszoveg)){ //ha a validate falseal ter vissza akkor megyunk be
         const parent = terElem.parentElement; // Kivesszük a terElem elem szülőjét
         const error = parent.querySelector('.error'); // Az adott szülőhöz tartozó error elemet keresünk
         if (error != "") { // Ha az error nem üres (azaz van hibaüzenet)
             error.innerHTML = errorszoveg; // Az error üzenetét az 'errorszoveg' változóval helyettesítjük
         }
-        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel a terElem üres
+        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel a terValue üres
     }
 
-    if (idoValue === "") { // Ha az idoValue változó üres, akkor hiba van
+    if(!validate(idoValue, errorszoveg)){ //ha a validate falseal ter vissza akkor megyunk be
         const parent = idoElem.parentElement; // Kivesszük az idoElem elem szülőjét
         const error = parent.querySelector('.error'); // Az adott szülőhöz tartozó error elemet keresünk
         if (error != "") { // Ha az error nem üres (azaz van hibaüzenet)
             error.innerHTML = errorszoveg; // Az error üzenetét az 'errorszoveg' változóval helyettesítjük
         }
-        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel az idoElem üres
+        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel az idoValue üres
     }
 
     if (valid) { // Ha nincs hiba, és valid értéke igaz, akkor folytatjuk
@@ -136,3 +138,18 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
     tbl.innerHTML = ""; // A táblázat tartalmát töröljük
     RenderTable(); // Meghívjuk a RenderTable függvényt a frissített táblázat megjelenítéséhez
 });
+
+function validate(validelem, errorszovege) { // Létrehozzuk a validate függvényt, amely egy mezőt és hibaüzenetet vár paraméterként
+    let valid = true; // A valid alapértelmezett értéke igaz
+
+    if (validelem.value === "") { // Ha a validelem értéke üres, akkor hiba van
+        const parent = validelem.parentElement; // Kivesszük a validelem szülőelemét
+        const error = parent.querySelector('.error'); // Az adott szülőhöz tartozó .error osztályú elemet keresünk
+        if (error !== "") { // Ha az error elem nem üres (tehát létezik ilyen elem)
+            error.innerHTML = errorszovege; // Az error elem tartalmát beállítjuk a hibaszövegre
+        }
+        valid = false; // Ha üres a mező, beállítjuk, hogy a valid hamis legyen
+    }
+
+    return valid; // A függvény visszaadja a valid értéket (igaz vagy hamis)
+}
