@@ -109,20 +109,10 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
     }
 
     if(!validate(terValue, errorszoveg)){ //ha a validate falseal ter vissza akkor megyunk be
-        const parent = terElem.parentElement; // Kivesszük a terElem elem szülőjét
-        const error = parent.querySelector('.error'); // Az adott szülőhöz tartozó error elemet keresünk
-        if (error != "") { // Ha az error nem üres (azaz van hibaüzenet)
-            error.innerHTML = errorszoveg; // Az error üzenetét az 'errorszoveg' változóval helyettesítjük
-        }
         valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel a terValue üres
     }
 
     if(!validate(idoValue, errorszoveg)){ //ha a validate falseal ter vissza akkor megyunk be
-        const parent = idoElem.parentElement; // Kivesszük az idoElem elem szülőjét
-        const error = parent.querySelector('.error'); // Az adott szülőhöz tartozó error elemet keresünk
-        if (error != "") { // Ha az error nem üres (azaz van hibaüzenet)
-            error.innerHTML = errorszoveg; // Az error üzenetét az 'errorszoveg' változóval helyettesítjük
-        }
         valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel az idoValue üres
     }
 
