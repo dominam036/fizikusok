@@ -116,14 +116,49 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
     if(!validate(idoElem, errorszoveg)){ //ha a validate falseal ter vissza akkor megyunk be
         valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel az idoValue üres
     }
-    
+    // Képviselők mezők validálása (kepv és kepv2)
+    if (kepvValue === "" && kepv2Value === "") { // Ha mindkét képviselő mező üres
+        const parent = kepvElem.parentElement; // A kepvHTML parentjét kivesszük
+        const error = parent.querySelector('.error'); // A parent error classos spanjét kivesszük
+        error.innerHTML = errorkepv; // Az error szövege errorkepv
+
+        const parent2 = kepv2Elem.parentElement; // A kepv2HTML parentjét kivesszük
+        const error2 = parent2.querySelector('.error'); // A parent2 error classos spanjét kivesszük
+        error2.innerHTML = errorkepv; // Az error2 szövege errorkepv
+
+        valid = false; // Mivel mindkét mező üres, érvénytelen a form
+    } else {
+        // Ha csak a kepv2 mező üres
+        if (kepv2Value === "" && kepvValue !== "") {
+            const parent2 = kepv2Elem.parentElement; // A kepv2HTML parentjét kivesszük
+            const error2 = parent2.querySelector('.error'); // A parent2 error classos spanjét kivesszük
+            error2.innerHTML = ""; // Az error2 szövege semmi
+        }
+        // Ha csak a kepv mező üres
+        if (kepvValue === "" && kepv2Value !== "") {
+            const parent = kepvElem.parentElement; // A kepvHTML parentjét kivesszük
+            const error = parent.querySelector('.error'); // A parent error classos spanjét kivesszük
+            error.innerHTML = ""; // Az error szövege semmi
+        }
+    }
+
     if (valid) { // Ha a form valid
-        uj = { 
-            ter: terValue, // A ter tulajdonság értéke terValue
-            ido: idoValue, // Az ido tulajdonság értéke idoValue
-            kepv: kepvValue, // A kepv tulajdonság értéke kepvValue
-            kepv2: kepv2Value, // A kepv2 tulajdonság értéke kepv2Value
-        };
+        // Ha a kepv mező üres, akkor a kepv2 mezőt fogjuk használni helyette
+        if (kepvValue === "") {  
+            uj = { 
+                ter: terValue, // A ter tulajdonság értéke terValue
+                ido: idoValue, // Az ido tulajdonság értéke idoValue
+                kepv: kepv2Value, // A kepv tulajdonság értéke kepv2Value
+            };
+        } else {
+            uj = { 
+                ter: terValue, // A ter tulajdonság értéke terValue
+                ido: idoValue, // Az ido tulajdonság értéke idoValue
+                kepv: kepvValue, // A kepv tulajdonság értéke kepvValue
+                kepv2: kepv2Value, // A kepv2 tulajdonság értéke kepv2Value
+            };
+        }
+
         sorok.push(uj); // Az új objektumot hozzáadjuk a sorok tömbhöz
     }
     tbl.innerHTML = ""; // A táblázat tartalmát töröljük
