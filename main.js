@@ -106,22 +106,22 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
         i.innerHTML = ""; // Az összes hibaüzenetet töröljük
     }
 
-    if (terV === "") { // Ha a terV változó üres, akkor hiba van
-        const parent = terHTML.parentElement; // Kivesszük a terHTML elem szülőjét
+    if (terValue === "") { // Ha a terValue változó üres, akkor hiba van
+        const parent = terElem.parentElement; // Kivesszük a terElem elem szülőjét
         const error = parent.querySelector('.error'); // Az adott szülőhöz tartozó error elemet keresünk
         if (error != "") { // Ha az error nem üres (azaz van hibaüzenet)
             error.innerHTML = errorszoveg; // Az error üzenetét az 'errorszoveg' változóval helyettesítjük
         }
-        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel a terV üres
+        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel a terElem üres
     }
 
-    if (idoV === "") { // Ha az idoV változó üres, akkor hiba van
-        const parent = idoHTML.parentElement; // Kivesszük az idoHTML elem szülőjét
+    if (idoValue === "") { // Ha az idoValue változó üres, akkor hiba van
+        const parent = idoElem.parentElement; // Kivesszük az idoElem elem szülőjét
         const error = parent.querySelector('.error'); // Az adott szülőhöz tartozó error elemet keresünk
         if (error != "") { // Ha az error nem üres (azaz van hibaüzenet)
             error.innerHTML = errorszoveg; // Az error üzenetét az 'errorszoveg' változóval helyettesítjük
         }
-        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel az idoV üres
+        valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel az idoElem üres
     }
 
     if (valid) { // Ha nincs hiba, és valid értéke igaz, akkor folytatjuk
