@@ -54,15 +54,15 @@ function fejlecGen(){ //létrehozom a fejlecgenerálás függvényt
     }
 }
 
-function RenderTable(){ //RenderTable fuggveny letrehozasa
+function RenderTable(tomb){ //RenderTable fuggveny letrehozasa
     fejlecGen();
 
     const tbd = document.createElement('tbody'); // Törzs létrehozása
     tbl.appendChild(tbd); // Törzs hozzáadása a táblázathoz
 
-    // Sorok hozzáadása a táblázathoz for ciklussal
-    for (let i = 0; i < sorok.length; i++) {
-        const sor = sorok[i]; // Aktuális sor
+    // tomb hozzáadása a táblázathoz for ciklussal
+    for (let i = 0; i < tomb.length; i++) {
+        const sor = tomb[i]; // Aktuális sor
 
         const tr = document.createElement('tr'); // Sor létrehozása
         tbd.appendChild(tr); // Sor hozzáadása a törzshöz
@@ -89,7 +89,7 @@ function RenderTable(){ //RenderTable fuggveny letrehozasa
     }
 }
 
-RenderTable(); // a renderTable meghívása
+RenderTable(sorok); // a renderTable meghívása
 
 const form = document.getElementById('form'); // A form elem beszerzése
 form.addEventListener('submit', function(e) { // A form submit eseményére eseménykezelőt adok
@@ -145,7 +145,7 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
         sorok.push(uj); // Az új objektumot hozzáadjuk a sorok tömbhöz
     }
     tbl.innerHTML = ""; // A táblázat tartalmát töröljük
-    RenderTable(); // Meghívjuk a RenderTable függvényt a frissített táblázat megjelenítéséhez
+    RenderTable(sorok); // Meghívjuk a RenderTable függvényt a frissített táblázat megjelenítéséhez
 });
 
 function validate(validelem, errorszovege) { // Létrehozzuk a validate függvényt, amely egy mezőt és hibaüzenetet vár paraméterként
