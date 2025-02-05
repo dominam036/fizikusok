@@ -69,6 +69,7 @@ function RenderTable(tomb){ //RenderTable fuggveny letrehozasa
 
 /**
  * legeneráljuk a form-ot
+ * @returns a formot adja vissza
  */
 function formGen(){ //letrehozzuk a formgeneralas fuggvenyt
     const formtomb = [ //letrehozzuk a formtombot, ami alapjan generalodik a form
@@ -118,6 +119,7 @@ function formGen(){ //letrehozzuk a formgeneralas fuggvenyt
     const button = document.createElement('button')
     button.innerHTML = "Hozzáadás"
     form.appendChild(button)
+    return form
 }
 
 /**

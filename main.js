@@ -24,14 +24,12 @@ const sorok = [
     }
 ];
 
-formGen();
+const form = formGen(); // A form elem beszerzése
 
 const tbl = document.createElement('table'); // Táblázat létrehozása
 document.body.appendChild(tbl); // Táblázat hozzáadása a body-hoz
 
 RenderTable(sorok); // a renderTable meghívása
-
-const form = document.getElementById('form'); // A form elem beszerzése
 
 form.addEventListener('submit', function(e) { // A form submit eseményére eseménykezelőt adok
     e.preventDefault(); // Megakadályozom az alapértelmezett műveletet
