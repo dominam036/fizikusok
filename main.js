@@ -1,9 +1,3 @@
-const fejlec = { // Fejléc objektuma
-    ter: "Fizika területe",  // A fejléc "Fizika területe" oszlopot tartalmaz
-    ido: "Időszak",  // A fejléc "Időszak" oszlopot tartalmaz
-    kepv: "Képviselők"  // A fejléc "Képviselők" oszlopot tartalmaz
-}
-
 const sorok = [
     {
         ter: "Optika", // Az első sor területe "Optika"
@@ -33,25 +27,35 @@ const sorok = [
 const tbl = document.createElement('table'); // Táblázat létrehozása
 document.body.appendChild(tbl); // Táblázat hozzáadása a body-hoz
 
+function fejlecGen(){ //létrehozom a fejlecgenerálás függvényt
+    const fejlec = { //a fejlec objektuma
+        ter: "Fizika területe",  //az objektum ter tulajdonsága
+        ido: "Időszak" ,  //az objektum ido tulajdonsága
+        kepv: "Képviselők"  //az objektum kepv tulajdonsága
+    }
+    const thead = document.createElement('thead') // thead letrehozasa
+    tbl.appendChild(thead) //a thead hozzaadasa a tablehez
+
+    const theadr = document.createElement('tr') //tr letrehozasa
+    thead.appendChild(theadr) //a tr hozzaadasa a thead hez
+
+    for(const i in fejlec){ //végigmegyünk a fejlec objektumon
+        if(i === "kepv"){ //ha az i éréke "kepv" akkor megyunk be
+            const th3 = document.createElement('th') //az elso th letrehozasa
+            th3.colSpan = 2 //beallitjuk a colspant a cellara
+            th3.innerHTML = fejlec[i] //az elso th szovege a fejlec i. tulajdonsága
+            theadr.appendChild(th3) //a th-t hozzaadjuk a trhez
+        }
+        else{
+            const th = document.createElement('th') //laz elso th letrehozasa
+            th.innerHTML = fejlec[i] //az elso th szovege a fejlec i. tulajdonsága
+            theadr.appendChild(th) //a th-t hozzaadjuk a trhez
+        }
+    }
+}
+
 function RenderTable(){ //RenderTable fuggveny letrehozasa
-    const thd = document.createElement('thead'); // Fejléc létrehozása
-    tbl.appendChild(thd); // Fejléc hozzáadása a táblázathoz
-
-    const thr = document.createElement('tr'); // Sor létrehozása a fejlécben
-    thd.appendChild(thr); // Sor hozzáadása a fejléchez
-
-    const th1 = document.createElement('th'); // Első fejléc cella létrehozása
-    th1.innerHTML = fejlec.ter; // Cella szövegének beállítása
-    thr.appendChild(th1); // Cella hozzáadása a fejlécsorhoz
-
-    const th2 = document.createElement('th'); // Második fejléc cella létrehozása
-    th2.innerHTML = fejlec.ido; // Cella szövegének beállítása
-    thr.appendChild(th2); // Cella hozzáadása a fejlécsorhoz
-
-    const th3 = document.createElement('th'); // Harmadik fejléc cella létrehozása
-    th3.colSpan = 2; // Oszlopok egyesítése
-    th3.innerHTML = fejlec.kepv; // Cella szövegének beállítása
-    thr.appendChild(th3); // Cella hozzáadása a fejlécsorhoz
+    fejlecGen();
 
     const tbd = document.createElement('tbody'); // Törzs létrehozása
     tbl.appendChild(tbd); // Törzs hozzáadása a táblázathoz
