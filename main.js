@@ -29,6 +29,9 @@ formGen();
 const tbl = document.createElement('table'); // Táblázat létrehozása
 document.body.appendChild(tbl); // Táblázat hozzáadása a body-hoz
 
+/**
+ * legeneráljuk a táblázat fejlécét
+ */
 function fejlecGen(){ //létrehozom a fejlecgenerálás függvényt
     const fejlec = { //a fejlec objektuma
         ter: "Fizika területe",  //az objektum ter tulajdonsága
@@ -56,6 +59,10 @@ function fejlecGen(){ //létrehozom a fejlecgenerálás függvényt
     }
 }
 
+/**
+ * legeneráljuk a bekért tömb alapján a táblázatot
+ * @param {Array} tomb a generálandó táblázat elemeit tartalmazó tömb
+ */
 function RenderTable(tomb){ //RenderTable fuggveny letrehozasa
     fejlecGen();
 
@@ -94,6 +101,10 @@ function RenderTable(tomb){ //RenderTable fuggveny letrehozasa
 RenderTable(sorok); // a renderTable meghívása
 
 const form = document.getElementById('form'); // A form elem beszerzése
+
+/**
+ * legeneráljuk a form-ot
+ */
 function formGen(){ //letrehozzuk a formgeneralas fuggvenyt
     const formtomb = [ //letrehozzuk a formtombot, ami alapjan generalodik a form
         {
@@ -143,6 +154,7 @@ function formGen(){ //letrehozzuk a formgeneralas fuggvenyt
     button.innerHTML = "Hozzáadás"
     form.appendChild(button)
 }
+
 form.addEventListener('submit', function(e) { // A form submit eseményére eseménykezelőt adok
     e.preventDefault(); // Megakadályozom az alapértelmezett műveletet
     const terElem = document.getElementById('fizika'); // Elérem a HTML-ból a fizika mezőt
@@ -199,6 +211,12 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
     RenderTable(sorok); // Meghívjuk a RenderTable függvényt a frissített táblázat megjelenítéséhez
 });
 
+/**
+ * Megvizsgáljuk, hogy az elem valid-e
+ * @param {HTMLElement} validelem 
+ * @param {String} errorszovege 
+ * @returns hogy valid-e az elem vagy sem
+ */
 function validate(validelem, errorszovege) { // Létrehozzuk a validate függvényt, amely egy mezőt és hibaüzenetet vár paraméterként
     let valid = true; // A valid alapértelmezett értéke igaz
 
@@ -214,6 +232,13 @@ function validate(validelem, errorszovege) { // Létrehozzuk a validate függvé
     return valid; // A függvény visszaadja a valid értéket (igaz vagy hamis)
 }
 
+/**
+ * Megvizsgáljuk, hogy a két képviselő(HTMLElement) valid-e
+ * @param {HTMLElement} kepv1 
+ * @param {HTMLElement} kepv2 
+ * @param {String} errorszovege 
+ * @returns hogy valid-e az elem vagy sem
+ */
 function validateKepv(kepv1, kepv2, errorszovege){
     let valid = true;
     if (kepv1.value === "" && kepv2.value === "") { // Ha mindkét képviselő mező üres
