@@ -24,6 +24,8 @@ const sorok = [
     }
 ];
 
+formGen();
+
 const tbl = document.createElement('table'); // Táblázat létrehozása
 document.body.appendChild(tbl); // Táblázat hozzáadása a body-hoz
 
@@ -92,6 +94,55 @@ function RenderTable(tomb){ //RenderTable fuggveny letrehozasa
 RenderTable(sorok); // a renderTable meghívása
 
 const form = document.getElementById('form'); // A form elem beszerzése
+function formGen(){ //letrehozzuk a formgeneralas fuggvenyt
+    const formtomb = [ //letrehozzuk a formtombot, ami alapjan generalodik a form
+        {
+            id: "fizika", //a formtomb elso objektumanak id tulajdonsága "fizika"
+            label: "Terület megnevezése:" //a formtomb elso objektumanak label tulajdonsága "Terület megnevezése"
+        },
+        {
+            id: "ido", //a formtomb masodik objektumanak id tulajdonsága "ido"
+            label: "Időszak:" //a formtomb masodik objektumanak label tulajdonsága "Időszak"
+        },
+        {
+            id: "tudos1", //a formtomb haramdik objektumanak id tulajdonsága "tudos1"
+            label: "Első tudós:" //a formtomb haramdik objektumanak label tulajdonsága "Első tudós"
+        },
+        {
+            id: "tudos2", //a formtomb negyedik objektumanak id tulajdonsága "tudos2"
+            label: "Második tudós:" //a formtomb negyedik objektumanak label tulajdonsága "Második tudós"
+        }
+    ]
+    const form = document.createElement('form') //letrehozzuk a formot
+    form.id = "form" //a form id ja form
+    form.action = "#" //a form actionje #
+    document.body.appendChild(form) //a formot hozzáadjuk a bodyhoz
+    for(let i = 0; i < formtomb.length; i++){ //vegigmegyunk a formtomb-on 
+        const div = document.createElement('div') //letrehoznk egy divet
+        form.appendChild(div) //a divez hozzáadjuk a formhoz
+        const label = document.createElement('label') //letrehozunk egy labelt
+        label.innerHTML = formtomb[i].label //a label szovege a label tulajdonság az i. objektumbol
+        div.appendChild(label) ///a divhez hozzáadjuk a labelt
+        const br = document.createElement('br') //létrehozunk egy br-t 
+        div.appendChild(br) //a brt hozzáadjuk a divhez
+        const input = document.createElement('input') //létrehozunk egy input mezőt
+        div.appendChild(input)  //a inputot hozzáadjuk a divhez
+        input.type = "text" //az input type "text"
+        input.id = formtomb[i].id //az input idja az id tulajdonság az i. objektumbol
+        input.name = formtomb[i].id //az input nameje az id tulajdonság az i. objektumbol
+        const br2 = document.createElement('br') //létrehpzunk megegy brt
+        div.appendChild(br2) //a brt hozzáadjuk a divhez
+        const span = document.createElement('span') //létrehozunk egy spant az errornak
+        div.appendChild(span) //a divhez hozzáadjkuk a spant
+        span.className = "error" //a span class = error
+        
+        const br3 = document.createElement('br') //létrehozunk mégegy br-t
+        div.appendChild(br3) //a brt hozzáadjuk a divhez
+    }
+    const button = document.createElement('button')
+    button.innerHTML = "Hozzáadás"
+    form.appendChild(button)
+}
 form.addEventListener('submit', function(e) { // A form submit eseményére eseménykezelőt adok
     e.preventDefault(); // Megakadályozom az alapértelmezett műveletet
     const terElem = document.getElementById('fizika'); // Elérem a HTML-ból a fizika mezőt
