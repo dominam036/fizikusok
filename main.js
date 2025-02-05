@@ -117,29 +117,8 @@ form.addEventListener('submit', function(e) { // A form submit eseményére esem
         valid = false; // Beállítjuk, hogy a valid értéke hamis, mivel az idoValue üres
     }
     // Képviselők mezők validálása (kepv és kepv2)
-    if (kepvValue === "" && kepv2Value === "") { // Ha mindkét képviselő mező üres
-        const parent = kepvElem.parentElement; // A kepvHTML parentjét kivesszük
-        const error = parent.querySelector('.error'); // A parent error classos spanjét kivesszük
-        error.innerHTML = errorkepv; // Az error szövege errorkepv
-
-        const parent2 = kepv2Elem.parentElement; // A kepv2HTML parentjét kivesszük
-        const error2 = parent2.querySelector('.error'); // A parent2 error classos spanjét kivesszük
-        error2.innerHTML = errorkepv; // Az error2 szövege errorkepv
-
-        valid = false; // Mivel mindkét mező üres, érvénytelen a form
-    } else {
-        // Ha csak a kepv2 mező üres
-        if (kepv2Value === "" && kepvValue !== "") {
-            const parent2 = kepv2Elem.parentElement; // A kepv2HTML parentjét kivesszük
-            const error2 = parent2.querySelector('.error'); // A parent2 error classos spanjét kivesszük
-            error2.innerHTML = ""; // Az error2 szövege semmi
-        }
-        // Ha csak a kepv mező üres
-        if (kepvValue === "" && kepv2Value !== "") {
-            const parent = kepvElem.parentElement; // A kepvHTML parentjét kivesszük
-            const error = parent.querySelector('.error'); // A parent error classos spanjét kivesszük
-            error.innerHTML = ""; // Az error szövege semmi
-        }
+    if(!validateKepv(kepvElem, kepv2Elem, errorkepv)){ //ha a validate2 falseal tér vissza akkor megyunk be
+        valid = false //a valid értékét falsera állítjuk
     }
 
     if (valid) { // Ha a form valid
@@ -178,4 +157,33 @@ function validate(validelem, errorszovege) { // Létrehozzuk a validate függvé
     }
 
     return valid; // A függvény visszaadja a valid értéket (igaz vagy hamis)
+}
+
+function validateKepv(kepv1, kepv2, errorszovege){
+    let valid = true;
+    if (kepv1.value === "" && kepv2.value === "") { // Ha mindkét képviselő mező üres
+        const parent = kepv1.parentElement; // A kepv1 parentjét kivesszük
+        const error = parent.querySelector('.error'); // A parent error classos spanjét kivesszük
+        error.innerHTML = errorszovege; // Az error szövege errorszovege
+
+        const parent2 = kepv2.parentElement; // A kepv2 parentjét kivesszük
+        const error2 = parent2.querySelector('.error'); // A parent2 error classos spanjét kivesszük
+        error2.innerHTML = errorszovege; // Az error2 szövege errorszovege
+
+        valid = false; // Mivel mindkét mező üres, érvénytelen a form
+    } else {
+        // Ha csak a kepv2 mező üres
+        if (kepv2.value === "" && kepv1.value !== "") {
+            const parent2 = kepv2.parentElement; // A kepv2 parentjét kivesszük
+            const error2 = parent2.querySelector('.error'); // A parent2 error classos spanjét kivesszük
+            error2.innerHTML = ""; // Az error2 szövege semmi
+        }
+        // Ha csak a kepv mező üres
+        if (kepv1.value === "" && kepv2.value !== "") {
+            const parent = kepv1.parentElement; // A kepv1 parentjét kivesszük
+            const error = parent.querySelector('.error'); // A parent error classos spanjét kivesszük
+            error.innerHTML = ""; // Az error szövege semmi
+        }
+    }
+    return valid //a valid értékével térünk vissza
 }
